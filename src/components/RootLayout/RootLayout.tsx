@@ -1,11 +1,12 @@
+import { FC } from "react";
 import { Outlet } from "react-router-dom";
-import { RoomProvider } from "../../context/RoomContext";
 
 
-export default function RootLayout(){
+const RootLayout:FC<{}> = function(){
     return(
         <div>  
             <Outlet></Outlet>
         </div>
     )
 }
+export default RootLayout;

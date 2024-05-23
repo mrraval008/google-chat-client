@@ -1,0 +1,26 @@
+.main_btns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 2;
+}
+.main_btns button,.chat_btns button {
+    margin: 0px 10px;
+    cursor: pointer;
+}
+.chat_btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+.time_text{
+    flex: 1;
+    margin-left: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .time_text {
+    display: none
+    }
+  }

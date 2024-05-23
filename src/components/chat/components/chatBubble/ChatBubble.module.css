@@ -1,0 +1,15 @@
+.my_message{
+    align-self: flex-end;
+}
+.bubble{
+    border-radius: 10px;
+    margin: 10px 10px;
+    max-width: 80%;
+}
+.content{
+    background: #dedeff;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0;
+    word-wrap: break-word;
+}

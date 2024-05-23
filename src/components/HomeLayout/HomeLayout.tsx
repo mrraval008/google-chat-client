@@ -1,8 +1,10 @@
+import { FC } from "react";
 import { Outlet } from "react-router-dom";
 import { RoomProvider } from "../../context/RoomContext";
 
+const HomeLayout:FC<{}> = function(){
 
-export default function HomeLayout() {
+    
     return (
         <>  
             <RoomProvider>
@@ -11,3 +13,5 @@ export default function HomeLayout() {
         </>
     )
 }
+
+export default HomeLayout;

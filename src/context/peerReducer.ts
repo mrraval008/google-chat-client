@@ -1,10 +1,10 @@
 import { ADD_PEER,REMOVE_PEER } from "./peerActions";
-export type peerSate =  Record<string,{stream:MediaStream}>;
+export type peerSate =  Record<string,{stream:MediaStream,name:string}>;
 type peerAction =
  |
  {
     type:typeof ADD_PEER,
-    payload:{peerId:string,stream:MediaStream}
+    payload:{peerId:string,stream:MediaStream,name:string}
 } |
 {
     type:typeof REMOVE_PEER,
@@ -17,7 +17,8 @@ export const peerReducers  = (state:peerSate,action:peerAction)=>{
                 return {
                     ...state,
                     [action.payload.peerId]:{
-                        stream:action.payload.stream
+                        stream:action.payload.stream,
+                        name:action.payload.name
                     }
                 }
             case REMOVE_PEER:

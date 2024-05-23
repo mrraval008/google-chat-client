@@ -5,9 +5,34 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+textarea:focus, input:focus{
+  outline: none;
+}
+textarea, input {
+  padding: 10px;
+  font-size: 20px;
+  width: 100%;
+}
+button{
+  border: none;
+  background: transparent;
+}
+
+form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+}
+form input{
+  border: none;
+  border-bottom: 1px solid black;
 }

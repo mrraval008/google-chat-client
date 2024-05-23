@@ -1,0 +1,15 @@
+.player{
+    border-radius: 10px;
+    width: 100%;
+    border: 2px solid #fff6f6;
+}
+.video_container{
+    position: relative;
+}
+.title{
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    color: white;
+    font-size: 15px;
+}

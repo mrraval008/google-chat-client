@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './App.css';
 import { RoomProvider } from './context/RoomContext';
-import Home from './components/HomeLayout/Home/Home';
-import RootLayout from './components/RootLayout/RootLayout';
-import Room from './components/HomeLayout/Room/Room';
-import HomeLayout from "./components/HomeLayout/HomeLayout";
+import Home from './components/homeLayout/home/Home';
+import RootLayout from './components/rootLayout/RootLayout';
+import Room from './components/homeLayout/room/Room';
+import HomeLayout from "./components/homeLayout/HomeLayout";
+import { FC } from "react";
 
 
 const router = createBrowserRouter([
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
 
 ])
 
-function App() {
+  const App:FC<{}> = function(){
   return <RouterProvider router={router}></RouterProvider>
 }
 export default App;
