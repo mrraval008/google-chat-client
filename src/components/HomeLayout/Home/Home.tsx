@@ -1,10 +1,10 @@
 import { FC, useContext } from "react"
-import { RoomContext } from "../../../context/RoomContext"
-import VideoPlayer from "../../../library/videoPlayer/VideoPlayer"
+import { LendingPage } from "../../lendingpage/LendingPage";
 import styles from './Home.module.css';
+import {ws} from '../../../ws/ws';
+
 const Home:FC<{}> = function(){
 
-    const { ws, stream} = useContext(RoomContext)
     const createRoom = (userName:string) => {
         ws.emit("create-room",userName)
     }
@@ -18,22 +18,7 @@ const Home:FC<{}> = function(){
     }
     return (
         <div className={styles.container}>
-            <div className={styles.left_container}>
-                <VideoPlayer stream={stream}></VideoPlayer>
-            </div>
-            <div className={styles.right_container}>
-                <h2>Welcome to Video Chat</h2>
-                <form onSubmit={submitUserForm}>
-                    <div>
-                        <input name="userName" required placeholder="Please Enter Your Name"></input>
-                    </div>
-                    <div>
-                        <button className={styles.btn} type="submit">Start Meeting</button>
-                    </div>
-                </form>
-
-            </div>
-
+            <LendingPage submitUserForm={submitUserForm}></LendingPage>
         </div>
     )
 }

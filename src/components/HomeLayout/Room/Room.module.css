@@ -1,3 +1,10 @@
+.container{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
 .form_container{
     display: flex;
@@ -19,7 +26,7 @@
 
 }
 .vieo_container{
-  max-width: 100%;
+  max-width: 80%;
   margin: 0 auto;
   display: grid;
   gap: 1rem;
@@ -29,10 +36,10 @@
   align-items: center;
 }
 .vieo_container div{
-    padding: 1rem;
+    padding: 0.5rem;
 }
 .side_panel{
-    width: 350px;
+    width: 20%;
     height: 90vh;
 }
 

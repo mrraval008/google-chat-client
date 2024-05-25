@@ -6,8 +6,12 @@ import { Chat } from "../../chat/chat";
 import VideoPlayer from "../../../library/videoPlayer/VideoPlayer";
 import styles from './Room.module.css';
 import { ControlPanel } from "../../controlPanel/ControlPanel";
+import { LendingPage } from "../../lendingpage/LendingPage";
+import {ws} from '../../../ws/ws';
+
 const Room: FC<{}> = function () {
-      const { ws, myId, stream, peers, myName, setMyname, showChat } = useContext(RoomContext)
+      console.log("room created")
+      const {myId, stream, peers, myName, setMyname, showChat } = useContext(RoomContext)
       const { roomId } = useParams();
 
       useEffect(() => {
@@ -25,17 +29,8 @@ const Room: FC<{}> = function () {
       }
       if (!myName) {
             return (
-                  <div className={styles.form_container}>
-                        <h2>Welcome to Video Chat</h2>
-                        <form onSubmit={submitUserForm}>
-                              <div>
-                                    <input name="userName" required placeholder="Please Enter Your Name"></input>
-                              </div>
-                              <div>
-                                    <button className={styles.btn} type="submit">Join Meeting</button>
-                              </div>
-                        </form>
-
+                  <div className={styles.container}>
+                  <LendingPage submitUserForm={submitUserForm}></LendingPage>
                   </div>
 
             )
@@ -45,11 +40,11 @@ const Room: FC<{}> = function () {
                         <div className={styles.main_contianer}>
                               <div className={styles.vieo_container}>
                                     <div>
-                                          <VideoPlayer stream={stream} name={myName}></VideoPlayer>
+                                          <VideoPlayer stream={stream} name={myName} muted={true}></VideoPlayer>
                                     </div>
 
                                     {Object.values(peers as peerSate).map((peer) => {
-                                          return <div><VideoPlayer stream={peer.stream} name={peer.name}></VideoPlayer></div>
+                                          return <div id={peer.name}><VideoPlayer stream={peer.stream} name={peer.name}></VideoPlayer></div>
 
                                     })}
                               </div>

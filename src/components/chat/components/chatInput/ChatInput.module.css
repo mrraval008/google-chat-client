@@ -5,3 +5,6 @@
     border: 1px solid black;
     border-radius: 10px;
 }
+.chat_form{
+    flex-direction: row;
+}

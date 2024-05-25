@@ -1,6 +1,5 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider,Navigate } from "react-router-dom";
 import './App.css';
-import { RoomProvider } from './context/RoomContext';
 import Home from './components/homeLayout/home/Home';
 import RootLayout from './components/rootLayout/RootLayout';
 import Room from './components/homeLayout/room/Room';
@@ -14,7 +13,7 @@ const router = createBrowserRouter([
     element: <RootLayout></RootLayout>,
     children: [
       {
-        path: "home",
+        path: "/",
         element:  <HomeLayout></HomeLayout>,
         children: [
           {
@@ -24,14 +23,11 @@ const router = createBrowserRouter([
           {
             path: ":roomId",
             element: <Room></Room>
-          }
+          },
         ]
-
       },
-
-
     ]
-  }
+  },
 
 ])
 

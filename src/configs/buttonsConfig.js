@@ -42,3 +42,23 @@ export const chatButtons = [
 
     },
 ]
+export const lendingPageButtons = [
+    {   
+        id:1,
+        type:"audio",
+        icon: <MicIcon></MicIcon>,
+        background:"transparent",
+        disableIcon:<MicOffIcon></MicOffIcon>,
+        isActive:true
+
+    },
+    {   
+        id:2,
+        type:"video",
+        icon: <VideocamIcon></VideocamIcon>,
+        background:"transparent",
+        disableIcon:<VideocamOffIcon></VideocamOffIcon>,
+        isActive:true
+
+    }
+]

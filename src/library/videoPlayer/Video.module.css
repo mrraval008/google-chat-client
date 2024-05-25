@@ -13,3 +13,16 @@
     color: white;
     font-size: 15px;
 }
+.main_btns{
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    left: 50%;
+    transform: translate(-50%, 0);
+   
+}
+.main_btns button {
+    margin: 0px 10px;
+    cursor: pointer;
+    border: 1px solid #bfbebe;
+}

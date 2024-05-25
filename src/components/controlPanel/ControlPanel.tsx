@@ -6,11 +6,24 @@ import { useParams } from "react-router-dom";
 import { RoomContext } from "../../context/RoomContext";
 import { IconButton } from "../../types/iconButton";
 import { useNavigate } from "react-router-dom";
+import Utils from "../../utils/dateutils";
+import {ws} from '../../ws/ws';
 
-export const ControlPanel: FC<{}> = function ({ }) {
+export const ControlPanel: FC<{}> = function () {
     const { roomId } = useParams();
-    const { setMuteAudio,setMuteVideo ,ws,myId,setShowChat} = useContext(RoomContext)
-    const [menucontrolButtons,setMenucontrolButtons] = useState<IconButton[]>(controlButtons);
+    const { setMuteAudio,setMuteVideo,myId,setShowChat,muteAudio,muteVideo} = useContext(RoomContext)
+    const [menucontrolButtons,setMenucontrolButtons] = useState<IconButton[]>(()=>{
+        let ctrlBtns = controlButtons;
+        ctrlBtns.forEach((elem)=>{
+            if(elem.type === 'audio'){
+                elem.isActive = !muteAudio
+            }
+            if(elem.type === 'video'){
+                elem.isActive = !muteVideo
+            }
+        })
+        return ctrlBtns
+    });
     const [menuChatButtons,setMenuChatButtons] = useState<IconButton[]>(chatButtons);
     const [time, setTime] = useState<string>("");
 
@@ -19,26 +32,26 @@ export const ControlPanel: FC<{}> = function ({ }) {
     
     const handleButtonClick = (type: string,id:number,ctrlBtns:string) => {
       
-        if(ctrlBtns == 'menucontrolButtons'){
-            if(type == 'audio'){
+        if(ctrlBtns === 'menucontrolButtons'){
+            if(type === 'audio'){
                 setMuteAudio((currentState:boolean)=>!currentState)
-            }else if(type == 'video'){
+            }else if(type === 'video'){
                 setMuteVideo((currentState:boolean)=>!currentState)
-            }else if(type == 'endcall'){
+            }else if(type === 'endcall'){
                 ws.emit('end');
                 myId.disconnect();
-                navigate("/home");
+                navigate("/");
             }
 
             setMenucontrolButtons((currentState)=>{
               return toggleActiveState(currentState,id)
             })
         }
-        if(ctrlBtns == 'menuChatButtons'){
+        if(ctrlBtns === 'menuChatButtons'){
             setMenuChatButtons((currentState)=>{
               return toggleActiveState(currentState,id)
             })
-            if(type == 'chat'){
+            if(type === 'chat'){
                 setShowChat((currentState:boolean)=>!currentState)
             }
 
@@ -48,17 +61,12 @@ export const ControlPanel: FC<{}> = function ({ }) {
     useEffect(() => {
         const interval = setInterval(() => {
             const date:Date = new Date();
-            let hours:number = date.getHours();
-            let minutes:number | string = date.getMinutes();
-            const ampm = hours >= 12 ? 'pm' : 'am';
-            hours = Number(hours % 12);
-            hours = hours ? hours : 12; // the hour '0' should be '12'
-            minutes = minutes < 10 ? '0'+minutes : minutes;
-            let strTime = hours + ':' + minutes + ' ' + ampm;
+            let strTime = Utils.getTime(date)
             setTime(strTime);
         }, 1000);
     
         return () => clearInterval(interval);
+        
       }, []);
     
 
@@ -66,7 +74,7 @@ export const ControlPanel: FC<{}> = function ({ }) {
         let clonedState = currentState.map((elem)=>{
             return {...elem}
         })
-        let elemIndex = clonedState.findIndex((elem)=>elem.id == id);
+        let elemIndex = clonedState.findIndex((elem)=>elem.id === id);
         if(elemIndex > -1){
             clonedState[elemIndex].isActive = !clonedState[elemIndex].isActive
 
@@ -81,7 +89,7 @@ export const ControlPanel: FC<{}> = function ({ }) {
             <div className={styles.main_btns}>
                 {menucontrolButtons.map((btn) => {
                     return (
-                        <ButtonIcon onClick={() => { handleButtonClick(btn.type,btn.id,'menucontrolButtons') }} background={btn.background}>
+                        <ButtonIcon key={btn.id} onClick={() => { handleButtonClick(btn.type,btn.id,'menucontrolButtons') }} background={btn.background}>
                             {btn.isActive ?  btn.icon : btn.disableIcon ? btn.disableIcon :btn.icon}
                         </ButtonIcon>
                     )
@@ -91,7 +99,7 @@ export const ControlPanel: FC<{}> = function ({ }) {
             <div className={styles.chat_btns}>
                 {menuChatButtons.map((btn) => {
                     return (
-                        <ButtonIcon onClick={() => { handleButtonClick(btn.type,btn.id,'menuChatButtons') }} background={btn.background}>
+                        <ButtonIcon key={btn.id} onClick={() => { handleButtonClick(btn.type,btn.id,'menuChatButtons') }} background={btn.background}>
                                         {btn.isActive ?  btn.icon : btn.disableIcon ? btn.disableIcon :btn.icon}
 
                         </ButtonIcon>
