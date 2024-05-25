@@ -11,7 +11,7 @@ const ChatInput: FC = function({}){
                     sendMessage(eve.target[0].value);
                     eve.target.reset()
                 }}>
-                <input className={styles.input}></input>
+                <input required className={styles.input}></input>
                 <button type="submit"><SendIcon></SendIcon></button>
             </form>
         </>
